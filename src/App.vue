@@ -1,7 +1,12 @@
 <template>
-<div class="small">
-  <line-chart :chart-data="datacollection"></line-chart>
-  <button @click="andRepeat()">Randomize</button>
+<div>
+  <header>
+    Data Visualisation
+  </header>
+  <div class="small">
+    <line-chart :chart-data="datacollection"></line-chart>
+    <button @click="andRepeat()">Add</button>
+  </div>
 </div>
 </template>
 
@@ -18,15 +23,18 @@ export default {
       dataOne: null,
       dataTwo: null,
       labels: null,
-      options: null
+      options: null,
+      gradient: null
     }
   },
   mounted () {
     this.labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
     this.dataOne = [25, 10, 11, 23, 36, 44, 66, 20, 11, 50, 7]
     this.dataTwo = [40, 10, 1, 5, 20, 44, 13, 30, 5, 29, 44]
+    this.gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
+    this.gradient.addColorStop(0.5, 'rgba(225, 0, 0, 0.25)')
+    this.gradient.addColorStop(1, 'rgba(255, 0, 0, 0)')
     this.fillData()
-
   },
   methods: {
     fillData () {
@@ -35,7 +43,7 @@ export default {
         datasets: [
           {
             label: 'Data One',
-            backgroundColor: 'green',
+            backgroundColor: this.gradient,
             data: this.dataOne
           }, {
             label: 'Data Two',
